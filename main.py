@@ -1,3 +1,4 @@
+from cactus import Cactus
 from ground import Ground
 import pygame
 import os
@@ -15,17 +16,18 @@ BG_IMG = pygame.transform.scale2x(
 )
 
 
-def draw_window(window, ground):
-    # Displaying background image
+def draw_window(window, ground, cactuses):
     window.blit(BG_IMG, (0, 0))
 
     ground.draw(window)
+    for cactus in cactuses:
+        cactus.draw(window)
     pygame.display.update()
 
 
 def main():
     ground = Ground(FLOOR)
-
+    cactuses = [Cactus(700)]
     clock = pygame.time.Clock()
 
     run = True
@@ -38,7 +40,13 @@ def main():
                 quit()
                 break
         ground.move()
-        draw_window(WIN, ground)
+
+        for cactus in cactuses:
+            cactus.move()
+
+        # cactuses.append(Cactus(800))
+
+        draw_window(WIN, ground, cactuses)
 
 
 if __name__ == "__main__":
