@@ -51,3 +51,16 @@ class Cactus:
 
     def draw(self, window):
         window.blit(self.image, (self.x, self.bottom))
+
+    def collide(self, dino):
+        dino_mask = dino.get_mask()
+        cactus_mask = pygame.mask.from_surface(self.image)
+        # print('dino.bottom', dino.bottom)
+        offset = (self.x - dino.x, self.bottom - round(dino.bottom))
+
+        contact_point = dino_mask.overlap(cactus_mask, offset)
+
+        if contact_point:
+            return True
+
+        return False
