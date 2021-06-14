@@ -1,67 +1,22 @@
-from dino import Dino
-from cactus import Cactus
-from ground import Ground
-import pygame
 import os
+from nn import eval_genomes
+import neat
 
 
-WIN_WIDTH = 1000
-WIN_HEIGHT = 800
-FLOOR = 770
-WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+def run(config_path):
+    config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                                neat.DefaultSpeciesSet, neat.DefaultStagnation,
+                                config_path)
 
-BG_IMG = pygame.transform.scale2x(
-    pygame.image.load(
-        os.path.join('img', 'bg.png')
-    )
-)
+    population = neat.Population(config)
+    population.add_reporter(neat.StdOutReporter(True))
+    stats = neat.StatisticsReporter()
+    population.add_reporter(stats)
 
-
-def draw_window(window, ground, dinos, cactuses):
-    window.blit(BG_IMG, (0, 0))
-
-    ground.draw(window)
-
-    for cactus in cactuses:
-        cactus.draw(window)
-
-    for dino in dinos:
-        dino.draw(window)
-
-    pygame.display.update()
-
-
-def main():
-    ground = Ground(FLOOR)
-    cactuses = [Cactus(700)]
-    dinos = [Dino(100)]
-    i = 0
-    clock = pygame.time.Clock()
-
-    run = True
-    while run:
-        clock.tick(30)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-                pygame.quit()
-                quit()
-
-        i += 1
-        for dino in dinos:
-            dino.move()
-            if i == 80:
-                dino.jump()
-            # print(dino.bottom)
-
-        ground.move()
-
-        for cactus in cactuses:
-            cactus.move()
-
-        draw_window(WIN, ground, dinos, cactuses)
+    winner = population.run(eval_genomes, 50)
 
 
 if __name__ == "__main__":
-    main()
+    local_dir = os.path.dirname(__file__)
+    config_path = os.path.join(local_dir, 'config-feedforward.txt')
+    run(config_path)

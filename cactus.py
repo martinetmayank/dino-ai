@@ -34,6 +34,8 @@ class Cactus:
         self.x = x
         self.bottom = 0
         self.passed = False
+        self.width = 0
+        self.height = 0
         self.get_img()
         self.get_bottom_pos()
 
@@ -43,6 +45,8 @@ class Cactus:
     def get_img(self):
         index = random.randint(0, len(self.IMG) - 1)
         self.image = self.IMG[index]
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
     def get_bottom_pos(self):
         mask = pygame.mask.from_surface(self.image)
@@ -55,7 +59,6 @@ class Cactus:
     def collide(self, dino):
         dino_mask = dino.get_mask()
         cactus_mask = pygame.mask.from_surface(self.image)
-        # print('dino.bottom', dino.bottom)
         offset = (self.x - dino.x, self.bottom - round(dino.bottom))
 
         contact_point = dino_mask.overlap(cactus_mask, offset)
