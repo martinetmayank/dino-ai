@@ -4,24 +4,24 @@ import random
 
 CACTUS_IMG_PATH = 'img/cactus'
 CACTUS_IMG = [
-    pygame.image.load(
-        os.path.join(CACTUS_IMG_PATH, 'group.png')
-    ),
-    pygame.image.load(
-        os.path.join(CACTUS_IMG_PATH, 'large_1.png')
-    ),
-    pygame.image.load(
-        os.path.join(CACTUS_IMG_PATH, 'large_2.png')
-    ),
+    # pygame.image.load(
+    #     os.path.join(CACTUS_IMG_PATH, 'group.png')
+    # ),
+    # pygame.image.load(
+    #     os.path.join(CACTUS_IMG_PATH, 'large_1.png')
+    # ),
+    # pygame.image.load(
+    #     os.path.join(CACTUS_IMG_PATH, 'large_2.png')
+    # ),
     pygame.image.load(
         os.path.join(CACTUS_IMG_PATH, 'small_1.png')
     ),
-    pygame.image.load(
-        os.path.join(CACTUS_IMG_PATH, 'small_2.png')
-    ),
-    pygame.image.load(
-        os.path.join(CACTUS_IMG_PATH, 'small_3.png')
-    ),
+    # pygame.image.load(
+    #     os.path.join(CACTUS_IMG_PATH, 'small_2.png')
+    # ),
+    # pygame.image.load(
+    #     os.path.join(CACTUS_IMG_PATH, 'small_3.png')
+    # ),
 ]
 
 

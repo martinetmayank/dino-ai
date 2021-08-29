@@ -37,7 +37,7 @@ def eval_genomes(genomes, config):
 
     run = True
     while run and len(dinos):
-        clock.tick(60)
+        clock.tick(1000)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
